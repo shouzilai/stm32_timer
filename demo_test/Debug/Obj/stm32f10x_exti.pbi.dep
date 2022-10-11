@@ -1,0 +1,39 @@
+stm32f10x_exti.pbi: \
+  D:\ARMworkspace\demo_test\Std_drive\src\stm32f10x_exti.c \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_exti.h \
+  D:\ARMworkspace\demo_test\User\stm32f10x.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\CMSIS\Core\Include\core_cm3.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdint.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Defaults.h \
+  C:\\Program\ Files\ (x86)\\IAR\ Systems\\Embedded\ Workbench\ 8.3\\arm\\inc\\c\\DLib_Config_Full.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\CMSIS\Core\Include/cmsis_version.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\CMSIS\Core\Include/cmsis_compiler.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\CMSIS\Core\Include\cmsis_iccarm.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\iccarm_builtin.h \
+  D:\ARMworkspace\demo_test\Start_up\system_stm32f10x.h \
+  D:\ARMworkspace\demo_test\User/stm32f10x_conf.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_adc.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_bkp.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_can.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_cec.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_crc.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_dac.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_dbgmcu.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_dma.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_flash.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_fsmc.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_gpio.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_i2c.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_iwdg.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_pwr.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_rcc.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_rtc.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_sdio.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_spi.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_tim.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_usart.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\stm32f10x_wwdg.h \
+  D:\ARMworkspace\demo_test\Std_drive\inc\misc.h
