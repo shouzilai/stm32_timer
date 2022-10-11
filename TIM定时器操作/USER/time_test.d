@@ -1,0 +1,12 @@
+.\time_test.o: Time_test.c
+.\time_test.o: Time_test.h
+.\time_test.o: ..\CMSIS\stm32f10x.h
+.\time_test.o: ..\CMSIS\core_cm3.h
+.\time_test.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\time_test.o: ..\CMSIS\system_stm32f10x.h
+.\time_test.o: ..\USER\stm32f10x_conf.h
+.\time_test.o: ..\FWlib\inc\stm32f10x_gpio.h
+.\time_test.o: ..\CMSIS\stm32f10x.h
+.\time_test.o: ..\FWlib\inc\stm32f10x_rcc.h
+.\time_test.o: ..\FWlib\inc\stm32f10x_tim.h
+.\time_test.o: ..\FWlib\inc\misc.h
