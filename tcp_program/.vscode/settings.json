@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "recive_thread.h": "c",
+        "netdb.h": "c",
+        "pthread.h": "c",
+        "unistd.h": "c",
+        "send_thread.h": "c",
+        "hup_parse.h": "c",
+        "uart.h": "c",
+        "ring_buffer_fifo.h": "c",
+        "signal.h": "c",
+        "string.h": "c",
+        "led_app.h": "c",
+        "common.h": "c",
+        "hip.h": "c",
+        "tcp_server.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
