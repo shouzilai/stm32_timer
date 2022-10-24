@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "common.h": "c",
+        "timer_key.h": "c",
+        "stm32f10x_conf.h": "c",
+        "dma.h": "c",
+        "stm32f10x.h": "c",
+        "usart.h": "c",
+        "ring_buffer_fifo.h": "c",
+        "timer.h": "c"
+    }
+}
