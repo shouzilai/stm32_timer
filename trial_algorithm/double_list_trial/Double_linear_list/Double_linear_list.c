@@ -315,9 +315,8 @@ static void quick_sort(int array[], int head, int tail)
 {
     int low = head, hign = tail;
     if (low < hign) {
-        int temp = low;
-        while (low != hign)
-        {
+        int temp = array[low];
+        while (low < hign) {
             while(low < hign && temp <= array[hign]) {
                 hign--;
             }
@@ -366,7 +365,7 @@ int double_list_quick_order1(double_list_p d_list_p, int sort)
         return -1;
     }
     int count = 0;
-    double_list_p cur_p = d_list_p, first_p = d_list_p;
+    double_list_p cur_p = d_list_p, first_p = d_list_p, last_p = d_list_p;
     
     count = double_list_node_count(cur_p);
     first_p = double_list_guard(cur_p);
@@ -383,16 +382,15 @@ int double_list_quick_order1(double_list_p d_list_p, int sort)
     }
 
     cur_p = first_p->next;
-    for (int i = 0; i < count && cur_p; i++) {
+    for (int i = 0; i < count && cur_p != NULL; i++) {
+        last_p = cur_p;
         if (cur_p->val == data_val[i]) {
             // 保持不变
         } else {
             double_list_p temp_p = double_find_node(cur_p, data_val[i]);
-            cur_p->val = temp_p->val;
-            cur_p->data_len = temp_p->data_len;
-            cur_p->data = temp_p->data;
+            double_list_node_exchange(cur_p, temp_p);
         }
-        cur_p = cur_p->next;
+        cur_p = last_p->next;
     }    
     return SUCCESS;
 }
