@@ -1,0 +1,11 @@
+gcc recv_try.c -o recv_server -pthread
+
+gcc client_try.c -o client
+
+
+ 1440  lsof -i
+ 1441  netstat -tnlp
+
+
+
+192.168.41.62
