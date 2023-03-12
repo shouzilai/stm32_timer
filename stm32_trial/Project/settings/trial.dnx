@@ -31,15 +31,15 @@
         <MultiCoreRunAll>1</MultiCoreRunAll>
     </Simulator>
     <StLinkDriver>
-        <stlinkserialNo>30303032</stlinkserialNo>
+        <stlinkserialNo>9</stlinkserialNo>
         <stlinkfoundProbes />
+        <stlinkResetStyle>0</stlinkResetStyle>
+        <stlinkResetStrategy>2</stlinkResetStrategy>
         <CStepIntDis>_ 0</CStepIntDis>
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
-        <stlinkResetStyle>0</stlinkResetStyle>
-        <stlinkResetStrategy>1</stlinkResetStrategy>
     </StLinkDriver>
     <DebugChecksum>
-        <Checksum>995977372</Checksum>
+        <Checksum>3636444471</Checksum>
     </DebugChecksum>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>
@@ -118,25 +118,15 @@
         <ShowTimeSum>1</ShowTimeSum>
         <SumSortOrder>0</SumSortOrder>
     </EventLog>
-    <DisassembleMode>
-        <mode>0</mode>
-    </DisassembleMode>
-    <Breakpoints2>
-        <Count>0</Count>
-    </Breakpoints2>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
     <LogFile>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
-    <TermIOLog>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-    </TermIOLog>
-    <Aliases>
-        <Count>0</Count>
-        <SuppressDialog>0</SuppressDialog>
-    </Aliases>
     <DriverProfiling>
         <Enabled>0</Enabled>
         <Mode>3</Mode>
@@ -150,4 +140,15 @@
     <CallStackStripe>
         <ShowTiming>1</ShowTiming>
     </CallStackStripe>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
+    <Aliases>
+        <A0>_ "D:\Users\Desktop\stm32_trial\CMSIS\startup\startup_stm32f10x_cl.s" ""</A0>
+        <Count>1</Count>
+        <SuppressDialog>0</SuppressDialog>
+    </Aliases>
 </settings>

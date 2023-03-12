@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "double_linear_list.h": "c"
+        "double_linear_list.h": "c",
+        "unistd.h": "c",
+        "stdio.h": "c",
+        "common.h": "c",
+        "stdlib.h": "c",
+        "stdint.h": "c"
     }
 }

@@ -43,7 +43,7 @@ int main()
     for (int i = DOUBLE_LINEAR_TABLE_MAX_DATA * sizeof(double_list_p) - 1; i > -1; i--){
         // printf("cur val is %d\n", ((double_list_p)my_double_list_ptr->last_table->table + i)->val);
         printf("0x%x ", *((uint8_t*)my_double_list_ptr->last_table->table + i));
-        if (i % 4 == 0) {
+        if (i % 8 == 0) {
             printf("\n");
         }
     }
@@ -87,4 +87,5 @@ int main()
 }
 
 
-// gcc -o trial main.c .\Double_linear_list\Double_linear_list.c
+// gcc -g -o trial main.c Double_linear_list/Double_linear_list.c
+// valgrind --leak-check=yes ./trial

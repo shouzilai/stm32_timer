@@ -25,9 +25,9 @@ static int list_registration_init(list_register_p register_p, uint8_t size)
     }
 
     register_p->size = size;
-    register_p->table = (list_register_p*)malloc(size * sizeof(list_register_p));
+    register_p->table = (double_list_p*)malloc(size * sizeof(double_list_p));
     if (register_p->table != NULL) {
-        memset(register_p->table, 0x0, size * sizeof(list_register_p));
+        memset(register_p->table, 0x0, size * sizeof(double_list_p));
     }
     register_p->add_pos = 0;
     register_p->relative_stack_bottom = register_p->add_pos;
@@ -95,7 +95,7 @@ static int list_registration_pop(list_register_p register_p, double_list_p node_
     for (i = relate_bottom; i < DOUBLE_LINEAR_TABLE_MAX_DATA; i++) {
         cur_p += i;
         if ((*cur_p)->val == node_p->val) {
-            printf("pop cur is 0x%x, val is %d\n", *cur_p, node_p->val);
+            printf("pop cur is 0x%p, val is %d\n", *cur_p, node_p->val);
             memset(cur_p, 0x0, sizeof(double_list_p));
             break;
         }
@@ -216,7 +216,7 @@ int double_list_single_show(double_list_p d_list_p)
 int double_list_index(double_list_p d_list_p)
 {
     if (d_list_p == NULL) {
-        printf("double_list_index success\n");
+        printf("double_list_index failure\n");
         return FAILURE;
     }
     double_list_p frist_p = d_list_p;
@@ -255,7 +255,6 @@ double_list_p double_list_init(double_list_p d_list_p, uint8_t table_size)
     if (list_registration_init(d_list_p->last_table, table_size) == 0) {
         // memset(d_list_p->last_table->table, 0x0, 10 * sizeof(double_list_p));
         // d_list_p->last_table->add_pos = 0;
-        
         printf("double_list_init success\n");
         return d_list_p;
     } else {
@@ -333,8 +332,10 @@ int double_list_deinit(double_list_p d_list_p)
         cur_p = next_p;
     }
 
-    // free(d_list_p->last_table->table);
     list_registration_deinit(d_list_p->last_table);
+    if (first_p->last_table != NULL) {
+        free(first_p->last_table);
+    }
 
     printf("double_list_deinit success\n");
     return SUCCESS;
@@ -365,6 +366,7 @@ double_list_p double_list_add(double_list_p head_list_p, uint32_t val, uint8_t* 
     cur_p->val = val;
     cur_p->data_len = len;
     cur_p->data = (uint8_t*)malloc(sizeof(uint8_t) * DOUBLE_LINEAR_LIST_DATA_SIZE);
+    cur_p->last_table = NULL;
     if (cur_p->data == NULL) {
         free(cur_p);
         return NULL;
