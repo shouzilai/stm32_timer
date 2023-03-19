@@ -28,6 +28,17 @@ typedef enum EXIST_STATE_T {
 } EXIST_STATE;
 
 
+struct trie_task;
+typedef struct trie_task trie_task_t, *trie_task_p;
+//######################################################################
+struct trie_task {                          // 依赖反转，依赖注入，实现结构体
+    void*   (*init)(uint8_t* meg, int cmd); // 返回数据列表数组
+    int     (*deinit)(void *arg);
+    int     (*add)(void *arg, uint8_t* data, int cmd);
+    int     (*subtruct)(void *arg, int index);
+    int     (*show_list)(void *arg);
+} ;
+//######################################################################
 
 #endif // __COMMON_H__
 

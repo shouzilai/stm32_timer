@@ -195,6 +195,46 @@ int list_registration_clear(list_register_p register_p)
 
 
 
+//#####################################################################################
+static void *s_data_task_p = NULL;
+
+static int trie_task_register(trie_task_p *task_p, void* extrnal_data_p)
+{
+    if (task_p == NULL || extrnal_data_p == NULL) {
+        return FAILURE;
+    }
+
+    trie_task_p cur_task_p = NULL, target_task_p = (trie_task_p)extrnal_data_p;
+
+    cur_task_p = (trie_task_p)malloc(sizeof(trie_task_t));
+
+    cur_task_p->init      = target_task_p->init;
+    cur_task_p->deinit    = target_task_p->deinit;
+    cur_task_p->add       = target_task_p->add;
+    cur_task_p->subtruct  = target_task_p->subtruct;
+    cur_task_p->show_list = target_task_p->show_list; 
+
+    *task_p = cur_task_p;
+
+    return SUCCESS;
+}
+
+static int trie_task_unregister(trie_task_p *task_p)
+{
+    if (task_p == NULL) {
+        return FAILURE;
+    }
+
+    trie_task_p cur_task_p = NULL;
+
+    if (*task_p != NULL) {
+        free(*task_p);
+        *task_p = NULL;
+    }
+ 
+    return SUCCESS;
+}
+//#####################################################################################
 
 
 int double_list_single_show(double_list_p d_list_p) 
@@ -238,7 +278,7 @@ int double_list_index(double_list_p d_list_p)
 }
 
 
-double_list_p double_list_init(double_list_p d_list_p, uint8_t table_size)
+double_list_p double_list_init(double_list_p d_list_p, uint8_t table_size, void *extrnal_data_p)
 {
     if (d_list_p == NULL) {
         return NULL;
@@ -251,6 +291,14 @@ double_list_p double_list_init(double_list_p d_list_p, uint8_t table_size)
     d_list_p->next = NULL;
     d_list_p->last = NULL;
     d_list_p->last_table = (list_register_p)malloc(sizeof(list_register_t));
+
+//#####################################################################################
+    s_data_task_p = extrnal_data_p;
+
+    trie_task_register(&d_list_p->task, s_data_task_p);
+    d_list_p->argument = d_list_p->task->init("first", 0x1);
+
+//#####################################################################################
 
     if (list_registration_init(d_list_p->last_table, table_size) == 0) {
         // memset(d_list_p->last_table->table, 0x0, 10 * sizeof(double_list_p));
@@ -269,12 +317,25 @@ static int double_list_single_delete(double_list_p d_list_p)
     if (d_list_p == NULL) {
         return FAILURE;
     }
-    if (d_list_p->data != NULL) {
+    if (d_list_p->data != NULL && d_list_p->val != 0) {
         free(d_list_p->data);
         d_list_p->data = NULL;
     }
-    free(d_list_p);
-    d_list_p = NULL;
+
+//#####################################################################################
+    if (d_list_p->task != NULL) {
+        d_list_p->task->deinit(d_list_p->argument);
+    }
+    if (d_list_p->val == 0) {
+        trie_task_unregister(&d_list_p->task);  //外壳任务结构体代码，只有一份，只需要释放一次就行了
+    }
+//#####################################################################################
+
+    if (d_list_p->val != 0) {
+        free(d_list_p);
+        d_list_p = NULL;
+    } 
+
 
     return SUCCESS;
 }
@@ -337,6 +398,8 @@ int double_list_deinit(double_list_p d_list_p)
         free(first_p->last_table);
     }
 
+    double_list_single_delete(first_p);
+    // trie_task_unregister(&first_p->task);  //外壳任务结构体代码，只有一份，只需要释放一次就行了
     printf("double_list_deinit success\n");
     return SUCCESS;
 }
@@ -366,6 +429,12 @@ double_list_p double_list_add(double_list_p head_list_p, uint32_t val, uint8_t* 
     cur_p->val = val;
     cur_p->data_len = len;
     cur_p->data = (uint8_t*)malloc(sizeof(uint8_t) * DOUBLE_LINEAR_LIST_DATA_SIZE);
+
+    //#####################################################################################
+    cur_p->task = s_data_task_p;
+    cur_p->argument = cur_p->task->init("first", 0x1);
+    //#####################################################################################
+
     cur_p->last_table = NULL;
     if (cur_p->data == NULL) {
         free(cur_p);
@@ -379,7 +448,7 @@ double_list_p double_list_add(double_list_p head_list_p, uint32_t val, uint8_t* 
     cur_p->next = NULL;
 
     // 4.更新哨兵结点 最近入表 的成员
-    cur_p = double_list_guard(head_list_p);
+    cur_p = double_list_guard(head_list_p);  
     list_registration_push(cur_p->last_table, last_p->next);
     // cur_p->last_table->table[cur_p->last_table->add_pos++] = last_p->next;
 
@@ -642,6 +711,62 @@ int double_list_quick_order(double_list_p d_list_p, int sort)
     return SUCCESS;
 }
 
+//#####################################################################################
+int _double_list_data_add(double_list_p d_list_p, int val, uint8_t* data, int cmd)
+{
+    if (d_list_p == NULL || data == NULL) {
+        return FAILURE;
+    }
+    trie_task_p cur_task_p = NULL;
+    double_list_p cur_p = d_list_p;
+
+    cur_p = double_list_find_node(cur_p, val);
+    
+    if (cur_p != NULL) {
+        cur_task_p = cur_p->task;
+        printf("cur_task_p %p  add is %p arg %p\n", cur_task_p, cur_task_p->add, cur_p->argument);
+        cur_task_p->add((void*)cur_p->argument, data, cmd);
+    }
+
+    return SUCCESS;
+}
+
+int _double_list_data_subtruct(double_list_p d_list_p, int val, int index)
+{
+    if (d_list_p == NULL) {
+        return FAILURE;
+    }
+    trie_task_p cur_task_p = NULL;
+    double_list_p cur_p = d_list_p;
+
+    cur_p = double_list_find_node(cur_p, val);
+
+    if (cur_p != NULL) {
+        cur_task_p = cur_p->task;
+        printf("cur_task_p %p  add is %p arg %p\n", cur_task_p, cur_task_p->add, cur_p->argument);
+        cur_task_p->subtruct((void*)cur_p->argument, index);
+    }
+
+    return SUCCESS;
+}
+
+int _double_list_data_show_list(double_list_p d_list_p, int val)
+{
+    if (d_list_p == NULL) {
+        return FAILURE;
+    }
+    trie_task_p cur_task_p = NULL;
+    double_list_p cur_p = d_list_p;
+
+    cur_p = double_list_find_node(cur_p, val);
+
+    cur_p->task->show_list((void*)cur_p->argument);
+
+    printf("trie data show list\n");
+
+    return SUCCESS;
+}
+//#####################################################################################
 
 
 // 归并排序

@@ -24,6 +24,11 @@ struct double_linear_list {
     uint32_t data_len;
     uint8_t *data;
 
+//#####################################################################################
+    trie_task_p task;
+    void* argument;     // 接收数据列表数组
+//#####################################################################################
+
     double_list_p next;
     double_list_p last;
     list_register_p last_table;
@@ -50,7 +55,7 @@ double_list_p double_list_tail(double_list_p d_list_p);
 
 
 
-double_list_p double_list_init(double_list_p d_list_p, uint8_t table_size);
+double_list_p double_list_init(double_list_p d_list_p, uint8_t table_size, void *extrnal_data_p);
 
 int double_list_deinit(double_list_p d_list_p);
 
@@ -62,9 +67,13 @@ int double_list_node_exchange(double_list_p d_list_p1, double_list_p d_list_p2);
 
 int double_list_node_count(double_list_p d_list_p);
 
-int double_list_quick_order1(double_list_p d_list_low, double_list_p d_list_hign, int sort);
-
 int double_list_quick_order(double_list_p d_list_p, int sort);
+
+int _double_list_data_add(double_list_p d_list_p, int val, uint8_t* data, int cmd);
+
+int _double_list_data_subtruct(double_list_p d_list_p, int val, int index);
+
+int _double_list_data_show_list(double_list_p d_list_p, int val);
 
 #endif // __DOUBLE_LINEAR_LIST_H__
 
